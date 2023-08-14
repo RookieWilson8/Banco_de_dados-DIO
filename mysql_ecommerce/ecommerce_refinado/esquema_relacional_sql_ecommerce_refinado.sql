@@ -1,9 +1,9 @@
--- criação do banco de dados para un E-commerce
+--  do banco de dados  E-commerce
 drop database ecommerce_refinado;
 create database ecommerce_refinado;
 use ecommerce_refinado;
 
--- criar tabela clientes
+-- tabela clientes
 create table clientes(
 	idCliente int not null auto_increment,
     dataNascimento date not null,
@@ -15,7 +15,7 @@ create table clientes(
 );
 alter table clientes auto_increment=1;
 
--- criar tabela tipoClientes
+-- tabela tipoClientes
 create table tipoClientes(
 	idTipo int not null auto_increment,
     tipo enum('CPF', 'CNPJ') default 'CPF',
@@ -26,7 +26,7 @@ create table tipoClientes(
 );
 alter table tipoClientes auto_increment=1;
 
--- criar tabela pagamentos
+-- tabela pagamentos
 create table pagamentos(
 	idPagamento int auto_increment not null,	
     tipoPagamento enum('PIX', 'Boleto', 'Cartão', 'Dois Cartões') default 'Cartão',    
@@ -34,7 +34,7 @@ create table pagamentos(
 );
 alter table pagamentos auto_increment=1;
 
--- criar tabela produto
+-- tabela produto
 create table produtos(
 	idProduto int auto_increment primary key,
     nomeProduto varchar(20) not null,
@@ -47,7 +47,7 @@ create table produtos(
 );
 alter table produtos auto_increment=1;
 
--- criar tabela entregas
+-- tabela entregas
 create table entregas(
 	idEntrega int not null auto_increment,
     statusEntrega enum('Em andamento', 'Em processamento', 'Enviado', 'Entregue') default 'Em processamento',
@@ -57,7 +57,7 @@ create table entregas(
 );
 alter table entregas auto_increment=1;
 
--- criar tabela pedido
+-- tabela pedido
 create table pedidos(
 	idPedido int auto_increment,
     idPedidoPagamento int not null,
@@ -71,7 +71,7 @@ create table pedidos(
 );
 alter table pedidos auto_increment=1;
 
--- criar tabela estoque
+-- tabela estoque
 create table estoquesProdutos(
 	idEstoqueProduto int auto_increment primary key,
     quantidade int default 0,
@@ -79,7 +79,7 @@ create table estoquesProdutos(
 );
 alter table estoquesProdutos auto_increment=1;
 
--- criar tabela fornecedor
+-- tabela fornecedor
 create table fornecedores(
 	idFornecedor int auto_increment primary key,
     cnpj char(15) not null,
@@ -90,7 +90,7 @@ create table fornecedores(
 );
 alter table fornecedores auto_increment=1;
 
--- criar tabela vendedor
+-- tabela vendedor
 create table vendedores(
 	idVendedor int auto_increment primary key,
     razaoSocial varchar(45) not null,
@@ -104,7 +104,7 @@ create table vendedores(
 );
 alter table vendedores auto_increment=1;
 
--- criar tabela Produto / Vendedor
+-- tabela Produto / Vendedor
 create table produtosVendedores(
 	idProdutoVendedorVendedor int,
     idProdutoVendedorProduto int,
@@ -114,7 +114,7 @@ create table produtosVendedores(
     constraint fk_produtoVendedor_produto foreign key (idProdutoVendedorProduto) references produtos(idProduto)
 );
 
--- criar tabela Produto / Pedido
+-- tabela Produto / Pedido
 create table produtosPedidos(
 	idProdutoPedidoProduto int,
     idProdutoPedidoPedido int,
@@ -125,7 +125,7 @@ create table produtosPedidos(
     constraint fk_produtoPedido_pedido foreign key (idProdutoPedidoPedido) references pedidos(idPedido)
 );
 
--- criar tabela Estoque / Localidade
+-- tabela Estoque / Localidade
 create table estoquesLocalidades(
 	idEstoqueLocalidadeProduto int,
     idEstoqueLocalidadeEstoque int,
@@ -135,7 +135,7 @@ create table estoquesLocalidades(
     constraint fk_estoqueLocalidade_estoque foreign key (idEstoqueLocalidadeEstoque) references estoquesProdutos(idEstoqueProduto)
 );
 
--- criar tabela Produto / Fornecedor
+-- tabela Produto / Fornecedor
 create table produtosFornecedores(
 	idProdutoFornecedorProduto int,
     idProdutoFornecedorFornecedor int,

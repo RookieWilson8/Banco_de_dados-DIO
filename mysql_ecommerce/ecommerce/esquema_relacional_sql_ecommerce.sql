@@ -1,9 +1,9 @@
--- criação do banco de dados para un E-commerce
--- drop database ecommerce;
+--  banco de dados E-commerce
+
 create database ecommerce;
 use ecommerce;
 
--- criar tabela cliente
+-- tabela clientes
 create table clientes(
 	idCliente int not null auto_increment primary key,
     pNome varchar(10) not null,
@@ -16,7 +16,7 @@ create table clientes(
 );
 alter table clientes auto_increment=1;
 
--- criar tabela produto
+--  tabela produtos
 create table produtos(
 	idProduto int auto_increment primary key,
     nomeProduto varchar(10) not null,
@@ -29,7 +29,7 @@ create table produtos(
 );
 alter table produtos auto_increment=1;
 
--- criar tabela pedido
+-- tabela pedidos
 create table pedidos(
 	idPedido int auto_increment primary key,
     idPedidoCliente int,
@@ -41,7 +41,7 @@ create table pedidos(
 );
 alter table pedidos auto_increment=1;
 
--- criar tabela estoque
+-- tabela estoque
 create table estoquesProdutos(
 	idEstoqueProduto int auto_increment primary key,
     quantidade int default 0,
@@ -49,7 +49,7 @@ create table estoquesProdutos(
 );
 alter table estoquesProdutos auto_increment=1;
 
--- criar tabela fornecedor
+-- tabela fornecedor
 create table fornecedores(
 	idFornecedor int auto_increment primary key,
     cnpj char(15) not null,
@@ -60,7 +60,7 @@ create table fornecedores(
 );
 alter table fornecedores auto_increment=1;
 
--- criar tabela vendedor
+-- tabela vendedor
 create table vendedores(
 	idVendedor int auto_increment primary key,
     razaoSocial varchar(45) not null,
@@ -74,7 +74,7 @@ create table vendedores(
 );
 alter table vendedores auto_increment=1;
 
--- criar tabela Produto / Vendedor
+-- tabela Produto / Vendedor
 create table produtosVendedores(
 	idProdutoVendedorVendedor int,
     idProdutoVendedorProduto int,
@@ -84,7 +84,7 @@ create table produtosVendedores(
     constraint fk_produtoVendedor_produto foreign key (idProdutoVendedorProduto) references produtos(idProduto)
 );
 
--- criar tabela Produto / Pedido
+-- tabela Produto / Pedido
 create table produtosPedidos(
 	idProdutoPedidoProduto int,
     idProdutoPedidoPedido int,
@@ -95,7 +95,7 @@ create table produtosPedidos(
     constraint fk_produtoPedido_pedido foreign key (idProdutoPedidoPedido) references pedidos(idPedido)
 );
 
--- criar tabela Estoque / Localidade
+-- tabela Estoque / Localidade
 create table estoquesLocalidades(
 	idEstoqueLocalidadeProduto int,
     idEstoqueLocalidadeEstoque int,
@@ -105,7 +105,7 @@ create table estoquesLocalidades(
     constraint fk_estoqueLocalidade_estoque foreign key (idEstoqueLocalidadeEstoque) references estoquesProdutos(idEstoqueProduto)
 );
 
--- criar tabela Produto / Fornecedor
+-- tabela Produto / Fornecedor
 create table produtosFornecedores(
 	idProdutoFornecedorProduto int,
     idProdutoFornecedorFornecedor int,
